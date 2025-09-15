@@ -11,32 +11,38 @@ import os
 from pathlib import Path
 
 gi.require_version('Gtk', '3.0')
-gi.require_version('AppIndicator3', '0.1')
-from gi.repository import Gtk, GLib, AppIndicator3
+from gi.repository import Gtk, GLib
 
 class BatteryConservationApp:
     def __init__(self):
         self.conservation_path = "/sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
-        
+
+        self.setup_ui()
+
         # Verificar se o sistema suporta modo de conservação
         if not self.check_system_support():
-            self.show_error_dialog("Sistema não suportado", 
+            self.show_error_dialog("Sistema não suportado",
                                  "Este sistema não suporta modo de conservação da bateria ou o módulo ideapad_laptop não está carregado.")
             sys.exit(1)
-        
-        self.setup_ui()
+
         self.update_status()
     
     def check_system_support(self):
         """Verifica se o sistema suporta modo de conservação"""
         try:
-            # Verificar se o módulo ideapad_laptop está carregado
-            result = subprocess.run(['lsmod'], capture_output=True, text=True)
-            if 'ideapad_laptop' not in result.stdout:
+            # Verificar se o arquivo de controle existe (principal verificação)
+            if not Path(self.conservation_path).exists():
                 return False
-            
-            # Verificar se o arquivo de controle existe
-            return Path(self.conservation_path).exists()
+
+            # Verificar se conseguimos ler o arquivo
+            try:
+                with open(self.conservation_path, 'r') as f:
+                    status = f.read().strip()
+                    # Se conseguimos ler e o valor é 0 ou 1, o sistema é suportado
+                    return status in ['0', '1']
+            except:
+                return False
+
         except Exception:
             return False
     

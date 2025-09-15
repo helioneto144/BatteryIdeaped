@@ -18,18 +18,15 @@ fi
 # Verificar se o sistema suporta modo de conservação
 echo "Verificando suporte do sistema..."
 
-# Verificar módulo ideapad_laptop
-if ! lsmod | grep -q ideapad_laptop; then
-    echo "ERRO: Módulo ideapad_laptop não encontrado."
-    echo "Este programa funciona apenas em laptops Lenovo IdeaPad compatíveis."
-    exit 1
-fi
-
 # Verificar arquivo de controle
 CONSERVATION_PATH="/sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
-if [[ ! -f "$CONSERVATION_PATH" ]]; then
+if [[ -f "$CONSERVATION_PATH" ]]; then
+    echo "✓ Arquivo de controle encontrado: $CONSERVATION_PATH"
+    echo "✓ Sistema compatível com modo de conservação da bateria"
+else
     echo "ERRO: Arquivo de controle não encontrado: $CONSERVATION_PATH"
     echo "Este sistema pode não suportar modo de conservação da bateria."
+    echo "Verifique se você tem um laptop Lenovo IdeaPad compatível."
     exit 1
 fi
 
