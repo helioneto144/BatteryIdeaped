@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Battery Conservation Toggle
+Name[pt_BR]=Alternador de Conservação da Bateria
+Comment=Toggle battery conservation mode on/off
+Comment[pt_BR]=Liga/desliga o modo de conservação da bateria
+Exec=/usr/local/bin/battery_conservation_toggle.py
+Icon=battery
+Terminal=false
+Categories=System;Settings;
+Keywords=battery;conservation;power;energia;bateria;conservacao;
+StartupNotify=true

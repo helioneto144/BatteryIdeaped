@@ -1,321 +1,157 @@
-# 🔋 Battery Conservation Mode Toggle para Lenovo IdeaPad
+# 🔋 Battery Conservation Toggle para Laptops Lenovo IdeaPad
 
-<div align="center">
+Um programa simples e eficiente para controlar o **modo de conservação da bateria** em laptops **Lenovo IdeaPad** no **Fedora Linux** com **Gnome**.
 
-![Battery Conservation](https://img.shields.io/badge/Battery-Conservation-green)
-![Lenovo IdeaPad](https://img.shields.io/badge/Lenovo-IdeaPad-blue)
-![Fedora](https://img.shields.io/badge/Fedora-Linux-blue)
-![Gnome](https://img.shields.io/badge/Desktop-Gnome-orange)
+> 💡 **Para todos os usuários de IdeaPad**: Este programa foi criado para facilitar o controle do modo de conservação da bateria, prolongando a vida útil da sua bateria quando você trabalha sempre conectado à energia.
 
-**Controle fácil do modo de conservação da bateria para laptops Lenovo IdeaPad no Fedora Linux**
+## 🎯 O que faz
 
-</div>
+- **Liga/Desliga** o modo de conservação da bateria
+- **Interface gráfica** integrada ao Gnome
+- **Notificações** do sistema
+- **Linha de comando** para automação
+- **Instalação automática** no sistema
 
-## 🎯 Para Usuários de Lenovo IdeaPad
+### 🔋 Modo de Conservação:
+- **DESLIGADO (0)**: Carregamento normal até 100% - ideal para uso móvel
+- **LIGADO (1)**: Carregamento limitado a ~60% - ideal para uso sempre conectado
 
-Se você tem um **Lenovo IdeaPad** e usa **Fedora Linux**, este programa é para você!
+## 📋 Requisitos
 
-### 🤔 Por que usar o Modo de Conservação?
+- **Sistema**: Fedora Linux com Gnome
+- **Hardware**: Laptop Lenovo IdeaPad compatível
+- **Módulo**: `ideapad_laptop` carregado no kernel
+- **Dependências**: Python3 (já vem no Fedora)
 
-Seu laptop IdeaPad tem uma funcionalidade especial que pode **dobrar a vida útil da sua bateria**:
+## 🚀 Instalação Rápida
 
-- 🔋 **Sem conservação**: Bateria carrega até 100% → Degrada mais rápido
-- ✅ **Com conservação**: Bateria carrega só até 60% → Dura muito mais tempo
-
-### 📊 Quando usar cada modo:
-
-| Situação | Modo Recomendado | Por quê? |
-|----------|------------------|----------|
-| 🏠 Trabalho em casa/escritório | **LIGADO** | Laptop sempre na tomada, preserva bateria |
-| ✈️ Viagens e uso móvel | **DESLIGADO** | Precisa de autonomia máxima |
-| 🎮 Gaming conectado na energia | **LIGADO** | Protege bateria do calor e carga constante |
-| 📚 Estudos na biblioteca | **DESLIGADO** | Precisa de toda autonomia disponível |
-
-## ✅ Compatibilidade - Seu IdeaPad Funciona?
-
-Este programa funciona na maioria dos IdeaPads modernos:
-
-### ✅ **Modelos Testados e Compatíveis:**
-- IdeaPad Gaming 3
-- IdeaPad 5 (14" e 15")
-- IdeaPad Flex 5
-- IdeaPad S340, S540
-- IdeaPad L340, L3
-- IdeaPad 320, 330
-- E muitos outros modelos recentes
-
-### 🔍 **Como verificar se seu IdeaPad é compatível:**
-```bash
-# Execute este comando no terminal:
-ls /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode
-
-# Se aparecer o caminho do arquivo = ✅ Compatível
-# Se der erro "arquivo não encontrado" = ❌ Não compatível
-```
-
-### 💻 **Sistemas Suportados:**
-- ✅ Fedora Linux (todas as versões recentes)
-- ✅ Desktop Gnome
-- ✅ Módulo `ideapad_laptop` carregado (automático na maioria dos casos)
-
-## 🚀 Instalação Super Fácil (3 passos)
-
-### 📋 **Pré-requisitos (já vem no Fedora):**
-- ✅ Python 3 (já instalado)
-- ✅ GTK 3 (já instalado no Gnome)
-- ✅ PolicyKit (já instalado)
-
-### 📥 **Passo 1: Baixar o programa**
-
-**Opção A - Git (recomendado):**
+### 1. Clone o repositório:
 ```bash
 git clone https://github.com/helioneto144/BatteryIdeaped.git
 cd BatteryIdeaped
 ```
 
-**Opção B - Download direto:**
-1. Clique em "Code" → "Download ZIP" nesta página
-2. Extraia o arquivo
-3. Abra terminal na pasta extraída
-
-### ⚙️ **Passo 2: Instalar**
+### 2. Teste a compatibilidade:
 ```bash
-chmod +x install.sh
-./install.sh
+chmod +x testar.py
+./testar.py
 ```
 
-### 🎉 **Passo 3: Usar**
-1. Pressione a tecla **Super** (Windows)
-2. Digite "**Battery**"
-3. Clique em "**Battery Conservation Mode**"
-
-## 🔧 **O que a instalação faz:**
-- ✅ Verifica se seu IdeaPad é compatível
-- ✅ Instala o programa no sistema
-- ✅ Cria ícone no menu do Gnome
-- ✅ Configura permissões necessárias
-- ✅ Testa se tudo está funcionando
-
-### Instalação Manual
-
-Se preferir instalar manualmente:
-
+### 3. Use imediatamente (versão simples):
 ```bash
-# Copiar script principal
-sudo cp battery_conservation.py /usr/local/bin/
-sudo chmod +x /usr/local/bin/battery_conservation.py
+chmod +x battery_toggle_simple.py
 
-# Instalar entrada do menu
-sudo cp battery-conservation.desktop /usr/share/applications/
-sudo chmod 644 /usr/share/applications/battery-conservation.desktop
+# Ver status atual
+./battery_toggle_simple.py --status
 
-# Atualizar cache do desktop
-sudo update-desktop-database /usr/share/applications/
+# Alternar modo (vai pedir senha)
+sudo ./battery_toggle_simple.py --toggle
 ```
 
-## 🎮 Como Usar Seu Novo Controle de Bateria
-
-### 🖱️ **Método 1: Interface Gráfica (Mais Fácil)**
-
-1. **Abrir o programa:**
-   - Pressione `Super` (tecla Windows)
-   - Digite "**Battery**" ou "**Conservação**"
-   - Clique em "**Battery Conservation Mode**"
-
-2. **Usar a interface:**
-   - 📊 **Status atual**: Mostra se está ligado/desligado
-   - 🔄 **Botão principal**: Clique para alternar o modo
-   - 🔄 **Atualizar**: Verifica o status atual
-   - ℹ️ **Informações**: Explica o que cada modo faz
-
-### ⌨️ **Método 2: Linha de Comando**
-
+### 4. Ou instale no sistema (versão completa):
 ```bash
-# Abrir interface gráfica
-python3 /usr/local/bin/battery_conservation.py
-
-# Verificar status atual
-cat /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode
+chmod +x instalar.sh
+./instalar.sh
 ```
 
-### 📱 **Exemplo de Uso Diário:**
+## 📱 Como Usar
 
-**🌅 Manhã (indo trabalhar):**
-- Modo: **DESLIGADO**
-- Motivo: Preciso de autonomia máxima
-
-**🏠 Chegando em casa:**
-- Modo: **LIGADO**
-- Motivo: Vou usar conectado na energia
-
-**✈️ Viagem:**
-- Modo: **DESLIGADO**
-- Motivo: Preciso de toda bateria disponível
-
-### Comandos Manuais (avançado)
-
+### ⚡ Método 1: Linha de Comando (Mais Rápido)
 ```bash
-# Verificar status atual
+# Verificar status
+./battery_toggle_simple.py --status
+
+# Alternar modo
+sudo ./battery_toggle_simple.py --toggle
+
+# Modo interativo
+./battery_toggle_simple.py
+```
+
+### 🖱️ Método 2: Interface Gráfica (Após instalação)
+1. Abra o menu de aplicações do Gnome
+2. Procure por "**Battery Conservation Toggle**"
+3. Clique para alternar o modo
+
+### ⌨️ Método 3: Atalho de Teclado
+1. **Configurações** → **Teclado** → **Atalhos Personalizados**
+2. Adicione:
+   - **Nome**: Battery Conservation
+   - **Comando**: `battery_conservation_toggle.py --toggle`
+   - **Tecla**: Ctrl+Alt+B (ou sua preferência)
+
+### 💻 Método 4: Comandos Manuais
+```bash
+# Ver status
 cat /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode
 
-# Ligar modo conservação (requer sudo)
+# Ligar conservação (como root)
 echo 1 | sudo tee /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode
 
-# Desligar modo conservação (requer sudo)
+# Desligar conservação (como root)
 echo 0 | sudo tee /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode
 ```
 
-## Desinstalação
+## 📁 Arquivos do Projeto
 
-Para remover o programa:
+- **`battery_toggle_simple.py`** - ⭐ Versão simples recomendada (linha de comando)
+- **`battery_conservation_toggle.py`** - Versão completa com interface gráfica
+- **`testar.py`** - Script para verificar compatibilidade
+- **`instalar.sh`** - Instalador automático
+- **`battery_conservation.desktop`** - Arquivo para menu do Gnome
+- **`INSTRUCOES_FINAIS.md`** - Guia completo de uso
+- **`COMO_USAR.md`** - Instruções detalhadas
 
+## ⚠️ Solução de Problemas
+
+### "Sistema não compatível"
+- Verifique se é um laptop **Lenovo IdeaPad**
+- Execute: `grep ideapad_laptop /proc/modules`
+
+### "Arquivo de controle não encontrado"
+- Seu modelo pode não suportar modo de conservação
+- Verifique se existe: `/sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode`
+
+### "Permissão negada"
+- Use `sudo` para alternar o modo
+- Instale polkit para melhor experiência: `sudo dnf install polkit`
+
+## 🛠️ Dependências Opcionais
+
+Para a versão com interface gráfica:
 ```bash
-chmod +x uninstall.sh
-./uninstall.sh
+sudo dnf install python3-gobject gtk3-devel polkit
 ```
 
-Ou manualmente:
+## 🗑️ Desinstalação
 
 ```bash
-sudo rm -f /usr/local/bin/battery_conservation.py
-sudo rm -f /usr/share/applications/battery-conservation.desktop
+sudo rm /usr/local/bin/battery_conservation_toggle.py
+sudo rm /usr/share/applications/battery_conservation.desktop
 sudo update-desktop-database /usr/share/applications/
 ```
 
-## 🔧 Solução de Problemas para IdeaPads
+## 🤝 Contribuições
 
-### ❌ **"Sistema não suportado"**
+- **Issues**: Reporte bugs ou sugestões
+- **Pull Requests**: Melhorias são bem-vindas
+- **Testes**: Teste em diferentes modelos de IdeaPad
 
-**Seu IdeaPad não é compatível? Vamos verificar:**
+## 📄 Licença
 
-```bash
-# 1. Verificar se é um IdeaPad Lenovo
-sudo dmidecode -s system-product-name
+Este projeto é de **domínio público**. Use, modifique e distribua livremente!
 
-# 2. Verificar se o módulo está carregado
-lsmod | grep ideapad
+## 🎉 Para Usuários de IdeaPad
 
-# 3. Verificar se o arquivo de controle existe
-ls -la /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode
-```
+Este programa foi criado especificamente para facilitar a vida de usuários de laptops Lenovo IdeaPad no Fedora. Se você:
 
-**Soluções:**
-- ✅ Se o arquivo existe: Seu IdeaPad é compatível!
-- ❌ Se não existe: Modelo pode não ter suporte ou precisa atualizar BIOS
-- 🔄 Tente reiniciar e verificar novamente
+- ✅ Trabalha sempre conectado à energia
+- ✅ Quer prolongar a vida da bateria
+- ✅ Precisa alternar entre uso móvel e desktop
+- ✅ Quer uma interface simples e eficiente
 
-### ⚠️ **"Falha ao alterar modo de conservação"**
-
-**Problema de permissão? Vamos resolver:**
-
-```bash
-# Verificar se pkexec está instalado
-which pkexec
-
-# Se não estiver, instalar:
-sudo dnf install polkit
-```
-
-**Outras soluções:**
-- 🔐 Certifique-se de que sua conta tem privilégios sudo
-- 🔄 Tente fechar e abrir o programa novamente
-- 💻 Teste manual: `echo 1 | sudo tee /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode`
-
-### 🖥️ **Interface não abre**
-
-**Problema com GTK? Instalar dependências:**
-
-```bash
-# Instalar tudo que precisa
-sudo dnf install python3 python3-gobject gtk3-devel polkit
-
-# Se ainda não funcionar
-sudo dnf install gobject-introspection-devel
-```
-
-### 🆘 **Meu IdeaPad específico não funciona**
-
-**Modelos mais antigos ou específicos:**
-
-1. **Verificar variações do caminho:**
-   ```bash
-   find /sys -name "*conservation*" 2>/dev/null
-   find /sys -name "*ideapad*" 2>/dev/null
-   ```
-
-2. **Verificar BIOS:**
-   - Alguns IdeaPads precisam habilitar "Battery Conservation" na BIOS
-   - Procure em: Advanced → Power Management
-
-3. **Atualizar sistema:**
-   ```bash
-   sudo dnf update
-   ```
-
-### 📞 **Ainda não funciona?**
-
-Abra uma [issue no GitHub](https://github.com/helioneto144/BatteryIdeaped/issues) com:
-- 🏷️ Modelo exato do seu IdeaPad
-- 💻 Versão do Fedora
-- 📋 Saída do comando: `sudo dmidecode -s system-product-name`
-- 📋 Saída do comando: `find /sys -name "*conservation*" 2>/dev/null`
-
-## Estrutura do Projeto
-
-```
-BatteryFedora/
-├── battery_conservation.py    # Script principal
-├── battery-conservation.desktop # Entrada do menu
-├── install.sh                # Script de instalação
-├── uninstall.sh              # Script de desinstalação
-└── README.md                 # Este arquivo
-```
-
-## 🤝 Contribuições da Comunidade IdeaPad
-
-**Ajude outros usuários de IdeaPad!**
-
-### 🐛 **Encontrou um problema?**
-- Abra uma [issue](https://github.com/helioneto144/BatteryIdeaped/issues)
-- Inclua modelo do seu IdeaPad e versão do Fedora
-
-### ✨ **Quer melhorar o programa?**
-- Faça um fork do projeto
-- Implemente sua melhoria
-- Envie um pull request
-
-### 📝 **Testou em um novo modelo de IdeaPad?**
-- Compartilhe nos issues se funcionou
-- Ajude a expandir a lista de compatibilidade
-
-### 🌟 **Gostou do projeto?**
-- Dê uma ⭐ no GitHub
-- Compartilhe com outros usuários de IdeaPad
-- Escreva um review
-
-## 📊 Status do Projeto
-
-- ✅ **Funcional**: Testado em múltiplos modelos de IdeaPad
-- 🔄 **Ativo**: Mantido regularmente
-- 🆓 **Gratuito**: Sempre será livre e open source
-- 🛡️ **Seguro**: Usa métodos oficiais do kernel Linux
-
-## 📜 Licença
-
-Este projeto é **domínio público**. Use livremente em qualquer IdeaPad!
-
-## 🙏 Agradecimentos
-
-- **Lenovo** por implementar o modo de conservação nos IdeaPads
-- **Comunidade Linux** por manter os drivers ideapad_laptop
-- **Usuários** que testaram e reportaram compatibilidade
+**Este programa é para você!** 🚀
 
 ---
 
-<div align="center">
-
-**💡 Dica:** Marque este repositório com ⭐ para ajudar outros usuários de IdeaPad a encontrarem!
-
-**🔋 Sua bateria agradece!**
-
-</div>
+⭐ **Se este programa foi útil, deixe uma estrela no repositório!**
